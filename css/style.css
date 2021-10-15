@@ -1,0 +1,85 @@
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color:  #33FFCC;
+    text-align: center;
+}
+#content{
+    margin: 5rem 0;
+}
+
+#content > *{
+    margin: 1rem 0;
+}
+.invisible{
+    display: none;
+}
+
+table,tr,td{
+    border: 1px solid black;
+}
+table{
+    width: 30rem;
+    min-width: 20rem;
+    height: 30rem;
+    min-height: 20rem;
+}
+.on_click{
+    box-shadow: 5px 5px 8px rgb(27, 27, 27);
+}
+
+#player_turn{
+    color: #3d7200;
+}
+
+#h1_style{
+    background-color: #00FF33;
+    margin: 0;
+    padding: 2rem;
+    text-align: left;
+    border: 1px solid black;
+}
+input[type="text"]{
+    background-color: transparent;
+    border:none;
+    border-bottom: 2px solid black;
+    outline: none;
+}
+input[type="text"]:focus{
+    background-color: rgba(0, 0, 0, 0.158);
+    /* box-shadow: 1px 1px 10px black; */
+}
+input[type="submit"],input[type="reset"]{
+    width: 10rem;
+    background-color:#58d68d ;
+    border: 1px solid black;
+    border-radius: 2rem;
+    padding: 0.60rem;
+    text-decoration: none   ;
+}
+
+input[type="submit"]:hover,input[type="reset"]:hover{
+    box-shadow: 3px 3px 8px black;
+   
+}
+#game{
+    text-align: left;
+}
+#table{
+    margin: 2rem;
+    
+}
+
+#historial{
+    position: relative;
+    background-color: #00FF66 ;
+    width: 30rem;
+    top: -30rem;
+    left: 35rem;
+    padding: 1rem;
+}
+h2{
+    text-align: center;
+}
+
