@@ -30,7 +30,8 @@ table{
 }
 
 #player_turn{
-    color: #3d7200;
+    color: white;
+    text-shadow: 5px 5px rgb(95, 95, 95);
 }
 
 #h1_style{
@@ -82,4 +83,29 @@ input[type="submit"]:hover,input[type="reset"]:hover{
 h2{
     text-align: center;
 }
+
+.histori_add_element{
+    background-color: rgba(0, 0, 0, 0.288);
+    padding: 1rem;
+    font-size: 20px;
+    color:white;
+    margin: 0.10rem;
+}
+.colors{
+    position: relative;
+    padding: 0.75rem 1rem;
+    box-shadow: 2px 2px 5px black;
+    margin-left: 0.25rem;
+    text-align: right;
+    right: -1rem;
+}
+.player{
+    position: relative;
+    display: inline-block;
+    width: 10rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+
 

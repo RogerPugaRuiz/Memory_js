@@ -138,7 +138,7 @@ function game(map) {
                     
                     // drop de clicks after 1 second
                     setTimeout(() => {
-                        for (let i = 0; i < 2; i++) {
+                        for (let i = 0; i < click_elements.length; i++) {
                             click_elements[i].style.backgroundColor = "";
                             click_elements[i].classList.remove("on_click");
                         }
@@ -153,8 +153,14 @@ function game(map) {
                 else if (click_elements[0].style.backgroundColor === click_elements[1].style.backgroundColor && click_elements[0] !== click_elements[1]) {
                     if (next_turn == 0) {
                         player1_points++;
+
+                        histori_add_element(player1.value,click_elements[0].style.backgroundColor,click_elements[1].style.backgroundColor);
+
                     } else if (next_turn == 1) {
                         player2_points++;
+
+                        histori_add_element(player2.value,click_elements[0].style.backgroundColor,click_elements[1].style.backgroundColor);
+
                     }
                     click_elements = [];
                     
@@ -205,13 +211,23 @@ function historial() {
     document.getElementById("table").appendChild(aside);
     return aside;
 }
-function histori_add_element(jugada) {
+function histori_add_element(player_text, color1_click, color2_click) {
     let div = document.createElement("div");
+    let player = document.createElement("span");
     let color1 = document.createElement("span");
     let color2 = document.createElement("span");
 
+    div.classList.add("histori_add_element");
+    player.innerText = player_text;
+    color1.style.backgroundColor = color1_click;
+    color2.style.backgroundColor = color2_click;
+    player.classList.add("player");
+    color1.classList.add("colors");
+    color2.classList.add("colors");
 
+    div.appendChild(player);
     div.appendChild(color1);
     div.appendChild(color2);
+
     document.getElementById("historial").appendChild(div);
 }
