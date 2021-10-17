@@ -31,7 +31,7 @@ table{
 
 #player_turn{
     color: white;
-    text-shadow: 5px 5px rgb(95, 95, 95);
+    text-shadow: 3px 3px black;
 }
 
 #h1_style{
@@ -61,7 +61,7 @@ input[type="submit"],input[type="reset"]{
 }
 
 input[type="submit"]:hover,input[type="reset"]:hover{
-    box-shadow: 3px 3px 8px black;
+    box-shadow: 1px 1px black;
    
 }
 #game{
@@ -105,6 +105,7 @@ h2{
     width: 10rem;
     text-overflow: ellipsis;
     overflow: hidden;
+    text-shadow: 1px 1px black;
 }
 
 
