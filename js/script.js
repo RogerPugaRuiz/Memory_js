@@ -47,7 +47,10 @@ function table() {
         // with 4 columns
         for (let j = 0; j < 4; j++) {
             let tdAux = td.cloneNode(false);
-
+            let img = document.createElement("img");
+            img.src = "static/memory.png";
+            img.classList.add("img_memory");
+            tdAux.appendChild(img);
             trAux.appendChild(tdAux);
 
             let noColor = true;
@@ -112,18 +115,20 @@ function game(map) {
     let player1_points = 0;
     let player2_points = 0;
     turn(next_turn);
-    let h = historial();
+    historial(player1.value,player2.value);
 
     // on click td table elements
     document.getElementById("table").addEventListener("click", function (event) {
 
-        if (event.target.nodeName == "TD") {
-            let row = event.target.parentNode.rowIndex;
-            let col = event.target.cellIndex;
+        if (event.target.nodeName == "IMG") {
+            event.target.style.visibility = "hidden";
+            event.target.parentNode.style.transform = "rotateY(180deg)";
+            let row = event.target.parentNode.parentNode.rowIndex;
+            let col = event.target.parentNode.cellIndex;
             // new td clicked
-            click_elements.push(event.target);
-            event.target.style.backgroundColor = map[[row, col]];
-            event.target.classList.add("on_click");
+            click_elements.push(event.target.parentNode);
+            event.target.parentNode.style.backgroundColor = map[[row, col]];
+            event.target.parentNode.classList.add("on_click");
 
             // when you have 2 clicks
             if (click_elements.length == 2) {
@@ -139,11 +144,13 @@ function game(map) {
                     // drop de clicks after 1 second
                     setTimeout(() => {
                         for (let i = 0; i < click_elements.length; i++) {
+                            click_elements[i].style.transform = "rotateY(-180deg)";
                             click_elements[i].style.backgroundColor = "";
                             click_elements[i].classList.remove("on_click");
+                            click_elements[i].childNodes[0].style.visibility = "visible";
                         }
                         click_elements = [];
-                    }, 1000);
+                    }, 2000);
 
                     turn(next_turn);
 
@@ -153,13 +160,11 @@ function game(map) {
                 else if (click_elements[0].style.backgroundColor === click_elements[1].style.backgroundColor && click_elements[0] !== click_elements[1]) {
                     if (next_turn == 0) {
                         player1_points++;
-
-                        histori_add_element(player1.value,click_elements[0].style.backgroundColor,click_elements[1].style.backgroundColor);
+                        histori_add_element(document.getElementById("player1_name"),click_elements[0].style.backgroundColor,click_elements[1].style.backgroundColor);
 
                     } else if (next_turn == 1) {
                         player2_points++;
-
-                        histori_add_element(player2.value,click_elements[0].style.backgroundColor,click_elements[1].style.backgroundColor);
+                        histori_add_element(document.getElementById("player2_name"),click_elements[0].style.backgroundColor,click_elements[1].style.backgroundColor);
 
                     }
                     click_elements = [];
@@ -202,32 +207,43 @@ function turn(turn_value) {
     }
 }
 
-function historial() {
+function historial(player1_name_parameter, player2_name_parameter) {
     let aside = document.createElement("aside");
-    aside.id = "historial";
+    let player1 = document.createElement("div");
+    let player2 = document.createElement("div");
+    let player1_name = document.createElement("span");
+    let player2_name = document.createElement("span");
     let h2 = document.createElement("h2");
+
+    player1.classList.add("players");
+    player2.classList.add("players");
+    player1.id = "player1_name";
+    player2.id = "player2_name";
+    player1_name.classList.add("player_name");
+    player2_name.classList.add("player_name");
+    player1_name.innerText = player1_name_parameter;
+    player2_name.innerText = player2_name_parameter;
+
+    player1.appendChild(player1_name);
+    player2.appendChild(player2_name);
+
+    aside.id = "historial";
     h2.innerHTML = "Cartas";
     aside.appendChild(h2);
+    aside.appendChild(player1);
+    aside.appendChild(player2);
     document.getElementById("table").appendChild(aside);
-    return aside;
 }
-function histori_add_element(player_text, color1_click, color2_click) {
-    let div = document.createElement("div");
-    let player = document.createElement("span");
+function histori_add_element(player, color1_click, color2_click) {
     let color1 = document.createElement("span");
     let color2 = document.createElement("span");
 
-    div.classList.add("histori_add_element");
-    player.innerText = player_text;
     color1.style.backgroundColor = color1_click;
     color2.style.backgroundColor = color2_click;
-    player.classList.add("player");
     color1.classList.add("colors");
     color2.classList.add("colors");
 
-    div.appendChild(player);
-    div.appendChild(color1);
-    div.appendChild(color2);
+    player.appendChild(color1);
+    player.appendChild(color2);
 
-    document.getElementById("historial").appendChild(div);
 }
