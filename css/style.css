@@ -124,7 +124,7 @@ h2{
 }
 td{
     transform-style: preserve-3d;
-    transition: all 0.3s linear;
+    transition: transform 0.3s linear;
 }
 
 
