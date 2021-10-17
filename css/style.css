@@ -118,10 +118,6 @@ h2{
     cursor: pointer;
 }
 
-.rotate {
-
-    transform: rotateY(180deg);
-}
 td{
     transform-style: preserve-3d;
     transition: transform 0.3s linear;

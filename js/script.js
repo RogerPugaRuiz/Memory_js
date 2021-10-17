@@ -144,7 +144,7 @@ function game(map) {
                     // drop de clicks after 1 second
                     setTimeout(() => {
                         for (let i = 0; i < click_elements.length; i++) {
-                            click_elements[i].style.transform = "rotateY(-180deg)";
+                            click_elements[i].style.transform = "rotateY(360deg)";
                             click_elements[i].style.backgroundColor = "";
                             click_elements[i].classList.remove("on_click");
                             click_elements[i].childNodes[0].style.visibility = "visible";
