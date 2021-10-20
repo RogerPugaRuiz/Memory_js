@@ -120,28 +120,36 @@ function game(map) {
     // on click td table elements
     document.getElementById("table").addEventListener("click", function (event) {
 
-        if (event.target.nodeName == "IMG") {
+        // if img Memory is clicked
+        if (event.target.nodeName == "IMG" && click_elements.length < 2) {
+
+            // img do invisible
             event.target.style.visibility = "hidden";
+            // rotate the td table
             event.target.parentNode.style.transform = "rotateY(180deg)";
+
+            // get the row and cell td index
             let row = event.target.parentNode.parentNode.rowIndex;
             let col = event.target.parentNode.cellIndex;
-            // new td clicked
+            
+            // add new click_elements
             click_elements.push(event.target.parentNode);
             event.target.parentNode.style.backgroundColor = map[[row, col]];
+            // style click td
             event.target.parentNode.classList.add("on_click");
 
             // when you have 2 clicks
             if (click_elements.length == 2) {
                 // console.log(click_elements[0].style.backgroundColor + " " + click_elements[1].style.backgroundColor)
-
                 // if first td has different color than the second pass next turn
+
                 if (click_elements[0].style.backgroundColor !== click_elements[1].style.backgroundColor) {
                     next_turn++;
                     if (next_turn > 1) {
                         next_turn = 0;
                     }
                     
-                    // drop de clicks after 1 second
+                    // drop de clicks after 2 second
                     setTimeout(() => {
                         for (let i = 0; i < click_elements.length; i++) {
                             click_elements[i].style.transform = "rotateY(360deg)";
@@ -153,7 +161,6 @@ function game(map) {
                     }, 2000);
 
                     turn(next_turn);
-
                 }
                 // if first td has equal color than the second and the first is diferent object than the second
                 // increment the player point
@@ -161,20 +168,14 @@ function game(map) {
                     if (next_turn == 0) {
                         player1_points++;
                         histori_add_element(document.getElementById("player1_name"),click_elements[0].style.backgroundColor,click_elements[1].style.backgroundColor);
-
                     } else if (next_turn == 1) {
                         player2_points++;
                         histori_add_element(document.getElementById("player2_name"),click_elements[0].style.backgroundColor,click_elements[1].style.backgroundColor);
-
                     }
-                    click_elements = [];
-                    
+                    click_elements = [];           
                 }
-                
-
             }
         }
-
         // end the game
         let total_points = player1_points + player2_points;
         if (total_points >= 8) {
@@ -194,6 +195,7 @@ function game(map) {
 
 }
 
+// show the text turn game
 function turn(turn_value) {
     let div_turn = document.getElementById("turn");
     div_turn.innerHTML = "<h1 id=\"h1_style\">Turno de <span id=\"player_turn\"></span></h1>";
@@ -207,6 +209,8 @@ function turn(turn_value) {
     }
 }
 
+
+// show the history turn game
 function historial(player1_name_parameter, player2_name_parameter) {
     let aside = document.createElement("aside");
     let player1 = document.createElement("div");
@@ -234,6 +238,8 @@ function historial(player1_name_parameter, player2_name_parameter) {
     aside.appendChild(player2);
     document.getElementById("table").appendChild(aside);
 }
+
+// add the colors in
 function histori_add_element(player, color1_click, color2_click) {
     let color1 = document.createElement("span");
     let color2 = document.createElement("span");
